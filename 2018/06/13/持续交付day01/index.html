@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="持续交付第一章： 阅读重点： 针对软件交付的痛点，如何处理   手工操作整个发布过程：安装操作系统再将程序所依赖的第三方软件装好，手工将应用程序的软件产物复制到生产环境，创建配置信息到最后启动应用程序。如果整个架构是分布式或者面向服务的应用程序，在一部分一部分的完成风险极大，如果一步没有完美的执行，应用程序就无法正确的执行。而且很难一下子找到出错的位置。 反模式：手工部署软件。容易发生人为错误或者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/06/13/持续交付day01/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="持续交付第一章： 阅读重点： 针对软件交付的痛点，如何处理   手工操作整个发布过程：安装操作系统再将程序所依赖的第三方软件装好，手工将应用程序的软件产物复制到生产环境，创建配置信息到最后启动应用程序。如果整个架构是分布式或者面向服务的应用程序，在一部分一部分的完成风险极大，如果一步没有完美的执行，应用程序就无法正确的执行。而且很难一下子找到出错的位置。 反模式：手工部署软件。容易发生人为错误或者">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-13T14:01:06.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="持续交付第一章： 阅读重点： 针对软件交付的痛点，如何处理   手工操作整个发布过程：安装操作系统再将程序所依赖的第三方软件装好，手工将应用程序的软件产物复制到生产环境，创建配置信息到最后启动应用程序。如果整个架构是分布式或者面向服务的应用程序，在一部分一部分的完成风险极大，如果一步没有完美的执行，应用程序就无法正确的执行。而且很难一下子找到出错的位置。 反模式：手工部署软件。容易发生人为错误或者">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-持续交付day01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/13/持续交付day01/" class="article-date">
+  <time datetime="2018-06-13T14:01:06.824Z" itemprop="datePublished">2018-06-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h1><h2 id="第一章："><a href="#第一章：" class="headerlink" title="第一章："></a>第一章：</h2><hr>
+<h3 id="阅读重点："><a href="#阅读重点：" class="headerlink" title="阅读重点："></a>阅读重点：</h3><ul>
+<li>针对软件交付的痛点，如何处理</li>
+</ul>
+<ol>
+<li>手工操作整个发布过程：安装操作系统再将程序所依赖的第三方软件装好，手工将应用程序的软件产物复制到生产环境，创建配置信息到最后启动应用程序。如果整个架构是分布式或者面向服务的应用程序，在一部分一部分的完成风险极大，如果一步没有完美的执行，应用程序就无法正确的执行。而且很难一下子找到出错的位置。</li>
+<li><p>反模式：手工部署软件。容易发生人为错误或者发布步骤的执行顺序和时机不同也会导致结果的差异</p>
+<blockquote>
+<p>部署应该走向完全自动化，减少重复、无聊以及人为的失误。从过度的工作中解放出来以投身于更高价值的工作。</p>
+</blockquote>
+</li>
+<li><p>反模式：开发完成之后才向类生产环境部署。发布周期越长，开发团队在部署前作出错误假定的时间就越长，修复这些问题的时间也就越长。开发过程做的假设与现实之间的差距就越大。例如在windows系统上开发软件，最终要部署早solaris集群上。很多意想不到的事情。</p>
+<blockquote>
+<p>对策就是讲测试、部署和发布活动纳入到开发过程，让它们称为开发流正常的一部分</p>
+</blockquote>
+</li>
+<li>反模式：生产环境的手工配置管理。登录到生产服务器上手动修改配置，将修改进行记录，部署失败经常是某个人在生产环境下打了补丁，但却没有记录这次修改。系统无法回滚到之前部署的某个配置，不知道从什么时候开始集群中所用的操作系统，第三发基础设施依赖库版本或补丁级别就不同了。<blockquote>
+<p>自动化的关键：变更首先应该被提交到版本控制系统中，然后通过自动化过程对环境进行更新</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><code>持续集成：</code>每次提交都对应用程序进行构建并测试</p>
+<p><code>部署流水线</code>：<br>可以让开发、测试、运维更高效的协同工作，<br>让软件构建、部署、测试和发布过程对所有人可见，<br>改善反馈，以便在整个过程中更早的发现并解决问题，<br>团队能够通过一个完全自动化的过程在任意环境上部署发布软件的任意版本</p>
+<blockquote>
+<p>目标：<br>将软件发布工作变成一个低风险、频繁、廉价、迅速可预见没有任何突发事件且索然无味的事情。将高度自动化的测试和部署以及全面的配置管理结合在一起，实现一键式软件发布。因此以一种高效、快速、可靠的方式交付高质量且有价值的软件就是我们目标。</p>
+</blockquote>
+<blockquote>
+<p>实现：短周期、高质量的发布软件就需要，自动化：可重复部署，统一软件本身系统配置及环境，以保证每次的结果都是相同的，减少手动操作的错误机会。频繁做：如果能够做到频繁发布，每个发布版本之间的差异很小，减少了发布的相关风险。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/13/持续交付day01/" data-id="cjid6ohqz0002ygvxz17avik9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/13/README/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/13/持续交付day02/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/13/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/13/持续交付day01/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
