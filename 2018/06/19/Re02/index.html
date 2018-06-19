@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>regular expression 02 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正则表达式必知必会part5-7">
+<meta name="keywords" content="正则-匹配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="regular expression 02">
+<meta property="og:url" content="http://yoursite.com/2018/06/19/Re02/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="正则表达式必知必会part5-7">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-19T00:32:59.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="regular expression 02">
+<meta name="twitter:description" content="正则表达式必知必会part5-7">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Re02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/19/Re02/" class="article-date">
+  <time datetime="2018-06-18T16:00:00.000Z" itemprop="datePublished">2018-06-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      regular expression 02
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h1><h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>匹配多个连续重复的字符或字符集合</li>
+</ul>
+<h4 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h4><ul>
+<li>“@”字符不需要转义，但是”.”需要</li>
+<li>“+”,匹配同一个字符或字符集合[一次或多次]。举例：a匹配a本身，a+匹配一个或多个连续的a，类似的[0-9]+将匹配一个或多个连续的数字</li>
+<li>“[,+]”,当元字符出现在集合的时候，将被解释为普通字符</li>
+<li>“*”,匹配同一个字符或字符集合[零次或多次]</li>
+<li>“?”,匹配同一个字符或字符集合[零次或一次]</li>
+<li>“{}”,匹配重复次数的精确值，这个字符本身也是元字符所以如需要匹配本身需要转义{n,m}n到m次，至少匹配n次{n,}</li>
+<li>贪婪模式与懒惰模式：<ul>
+<li>贪婪型元字符：<em> 对应懒惰型字符 </em>？</li>
+<li>贪婪型元字符：+ 对应懒惰型字符 +？</li>
+<li>贪婪型元字符：{n, } 对应懒惰型字符 {n, }?</li>
+</ul>
+</li>
+</ul>
+<p><code>注意：一个字符也可以定义为一个集合，好处是可以增加可读性和避免产生误解</code></p>
+<h2 id="位置匹配"><a href="#位置匹配" class="headerlink" title="位置匹配"></a>位置匹配</h2><h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>需要对某段文本的特定位置进行匹配</li>
+</ul>
+<h4 id="内容：-1"><a href="#内容：-1" class="headerlink" title="内容："></a>内容：</h4><ul>
+<li>\b:单词边界boundary，匹配一个单词的开始或结尾</li>
+<li>\B:不匹配单词边界</li>
+<li>^:定义字符串的开头，当该字符出现在集合的开头时表示“非”</li>
+<li>$:定义字符串的结尾</li>
+<li>(?m):分行匹配模式multiline mode，使用时必须出现在整个模式的最前面，把换行符作为字符串分割符。^$还将匹配在一个换行符处开头或结束的字符串。</li>
+</ul>
+<h2 id="子表达式"><a href="#子表达式" class="headerlink" title="子表达式"></a>子表达式</h2><h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>subexpression：把一个表达式划分为一系列子表达式的目的是为了<code>把子表达式当作一个独立的元素来使用</code>，子表达式必须用()括起来</li>
+<li>对重复次数元字符的作用对象作出精确的设定和控制、对|操作符的OR条件作出准确的定义，允许嵌套使用。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjikz5u7u0004icvxkhh1ok1l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/15/Re01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">regular expression</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/19/Re02/">regular expression 02</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/Re01/">regular expression</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/13/CD02/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/13/CD01/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
