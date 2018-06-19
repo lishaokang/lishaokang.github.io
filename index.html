@@ -62,6 +62,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-正则02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/19/正则02/" class="article-date">
+  <time datetime="2018-06-19T00:16:57.736Z" itemprop="datePublished">2018-06-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: regular expression<br>date: 2018/06/19<br>categories:<br>tags: [正则匹配]</p>
+<h1 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h1><h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>匹配多个连续重复的字符或字符集合</li>
+</ul>
+<h4 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h4><ul>
+<li>“@”字符不需要转义，但是”.”需要</li>
+<li>“+”,匹配同一个字符或字符集合[一次或多次]。举例：a匹配a本身，a+匹配一个或多个连续的a，类似的[0-9]+将匹配一个或多个连续的数字</li>
+<li>“[,+]”,当元字符出现在集合的时候，将被解释为普通字符</li>
+<li>“*”,匹配同一个字符或字符集合[零次或多次]</li>
+<li>“?”,匹配同一个字符或字符集合[零次或一次]</li>
+<li>“{}”,匹配重复次数的精确值，这个字符本身也是元字符所以如需要匹配本身需要转义{n,m}n到m次，至少匹配n次{n,}</li>
+<li>贪婪模式与懒惰模式：<ul>
+<li>贪婪型元字符：<em> 对应懒惰型字符 </em>？</li>
+<li>贪婪型元字符：+ 对应懒惰型字符 +？</li>
+<li>贪婪型元字符：{n, } 对应懒惰型字符 {n, }?</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：一个字符也可以定义为一个集合，好处是可以增加可读性和避免产生误解</p>
+</blockquote>
+<h2 id="位置匹配"><a href="#位置匹配" class="headerlink" title="位置匹配"></a>位置匹配</h2><h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>需要对某段文本的特定位置进行匹配</li>
+</ul>
+<h4 id="内容：-1"><a href="#内容：-1" class="headerlink" title="内容："></a>内容：</h4><ul>
+<li>\b:单词边界boundary，匹配一个单词的开始或结尾</li>
+<li>\B:不匹配单词边界</li>
+<li>^:定义字符串的开头，当该字符出现在集合的开头时表示“非”</li>
+<li>$:定义字符串的结尾</li>
+<li>(?m):分行匹配模式multiline mode，使用时必须出现在整个模式的最前面，把换行符作为字符串分割符。^$还将匹配在一个换行符处开头或结束的字符串。</li>
+</ul>
+<h2 id="子表达式"><a href="#子表达式" class="headerlink" title="子表达式"></a>子表达式</h2><h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>subexpression：把一个表达式划分为一系列子表达式的目的是为了<code>把子表达式当作一个独立的元素来使用</code>，子表达式必须用()括起来</li>
+<li>对重复次数元字符的作用对象作出精确的设定和控制、对|操作符的OR条件作出准确的定义，允许嵌套使用。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/19/正则02/" data-id="cjikxx7co0001zsvx0jtjynqt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-正则01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/15/正则01/" class="article-date">
@@ -130,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/正则01/" data-id="cjifaonth0002jgvxzntanxox" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/正则01/" data-id="cjikxx7co0002zsvxlyg1803t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -207,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/持续交付day02/" data-id="cjifaont20001jgvxbn0z1fdb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/持续交付day02/" data-id="cjikxx7co0000zsvxd2s6q7qi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/持续交付day01/" data-id="cjifaonsm0000jgvx2evo59h9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/持续交付day01/" data-id="cjikxx7d30003zsvxpl6u6xpe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,6 +376,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/19/正则02/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2018/06/15/正则01/">regular expression</a>
