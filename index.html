@@ -62,6 +62,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Re03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/24/Re03/" class="article-date">
+  <time datetime="2018-06-23T16:00:00.000Z" itemprop="datePublished">2018-06-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/Re03/">regular expression 03</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h2><ul>
+<li><p>回溯引用匹配(backreference)</p>
+<ul>
+<li>概念：模式的后半部分引用在前半部分中定义的子表达式</li>
+<li><p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;This is a block of of text&quot;</span><br><span class="line">正则:[ ]+(\w+)[ ]+\1 可匹配到 of of </span><br><span class="line">注意：</span><br><span class="line">1.此处\1代表模式里的第一个子表达式，依次类推</span><br><span class="line">2.回溯引用只能用来引用模式里的子表达式</span><br><span class="line">3.回溯引用匹配通常从1开始计数，第0个匹配可以用来代表这个正则表达式</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回溯引用在替换中的应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello ben@forta.com is my email address&quot;</span><br><span class="line">正则:(\w+[\w\.]*@[\w\.]+\.\w+)</span><br><span class="line">替换:&lt;A HREF=&quot;mailto:$1&quot;&gt;$1&lt;/A&gt;</span><br><span class="line">这样就把邮箱变为了可以点击的邮箱地址</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>替换操作需要用到两个正则表达式，一个用来搜索，一个用来匹配文件的替换模式。</p>
+</li>
+<li>回溯引用可以跨模式使用，在第一个模式里被匹配的子表达式可以在第二个模式里面使用</li>
+</ul>
+</li>
+<li><p>前后查找(lookaround)</p>
+<ul>
+<li>概念：对某一位置的前、后内容进行查找</li>
+<li><p>向前查找</p>
+<ul>
+<li>指定一个必须匹配但不在结果中返回的模式，(?=)开头的子表达式等号后跟匹配的文本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://www.forta.com/&quot;</span><br><span class="line">正则:.+(?=:)==&gt;&quot;http&quot;</span><br><span class="line">这样就可以吧冒号之前的所有字符都匹配出来，但是不包括冒号</span><br><span class="line">正则2:.+(:)==&gt;&quot;http:&quot;</span><br><span class="line">这个正则查找到并匹配结果包含冒号</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>向后查找</p>
+<ul>
+<li>查找出现在匹配文本之前的字符，但不消费它。向后查找操作符是?&lt;=<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;ABC01 $23.45&quot;#匹配$后的数字</span><br><span class="line">正则:(?&lt;=\$)[0-9.]+</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>区分?=he ?&lt;=与其他?</p>
+<ul>
+<li>有小于号的是向后查找操作符，把这个小于号想成一个箭头，它指向文本阅读方向的后方 </li>
+</ul>
+</li>
+<li>对前后查找取非<ul>
+<li>负前后查找，将前后查找的等号换成叹号</li>
+<li>(?=):正向前查找</li>
+<li>(?!):负向前查找，将向前查找不与给定模式向匹配的文本</li>
+<li>(?&lt;=):正向后查找</li>
+<li>(?&lt;!):负向后查找，将向后查找不与给定模式向匹配的文本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjisy93gf0002dcvxpcxfbe1m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Re02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/19/Re02/" class="article-date">
@@ -120,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjikz5u7u0004icvxkhh1ok1l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjisy93fz0001dcvxhwwpx3ni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -200,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjikz5u7u0001icvxyreccjoz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjisy93gf0005dcvxugpu2itv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -277,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjikz5u7f0000icvxs7i450wu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjisy93gf0004dcvxk25wwv2r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -332,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjikz5u7u0002icvxabstyqex" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjisy93fz0000dcvx0o0d4gif" class="article-share-link">Share</a>
       
       
     </footer>
@@ -355,7 +439,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
     </div>
   </div>
 
@@ -365,7 +449,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a>
+      <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
     </div>
   </div>
 
@@ -385,6 +469,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/24/Re03/">regular expression 03</a>
+          </li>
         
           <li>
             <a href="/2018/06/19/Re02/">regular expression 02</a>
