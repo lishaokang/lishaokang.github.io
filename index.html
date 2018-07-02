@@ -62,6 +62,127 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-inner_to_outer_openvpn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/01/inner_to_outer_openvpn/" class="article-date">
+  <time datetime="2018-06-30T16:00:00.000Z" itemprop="datePublished">2018-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/01/inner_to_outer_openvpn/">openvpn</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="企业内网到阿里云内网互通解决方案"><a href="#企业内网到阿里云内网互通解决方案" class="headerlink" title="企业内网到阿里云内网互通解决方案"></a>企业内网到阿里云内网互通解决方案</h2><h4 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h4><ul>
+<li>待补充</li>
+</ul>
+<h4 id="Server端搭建（云服务器Centos7-4）"><a href="#Server端搭建（云服务器Centos7-4）" class="headerlink" title="Server端搭建（云服务器Centos7.4）"></a>Server端搭建（云服务器Centos7.4）</h4><ul>
+<li><p>openvpn install</p>
+<ul>
+<li>yum -y install epel-release</li>
+<li>yum -y install openvpn</li>
+<li>yum -y install unzip</li>
+</ul>
+</li>
+<li><p>Easy RSA3生成密钥及证书</p>
+<ul>
+<li>wget -c <a href="https://github.com/OpenVPN/easy-rsa/archive/master.zip" target="_blank" rel="noopener">https://github.com/OpenVPN/easy-rsa/archive/master.zip</a></li>
+<li>unzip master.zip</li>
+<li>mv easy-rsa-master easy-rsa</li>
+<li>cp easy-rsa /etc/openvpn/  -r</li>
+<li><p>cd /etc/openvpn/easy-rsa/easyrsa3</p>
+</li>
+<li><p>生成服务器端证书</p>
+</li>
+<li>cp vars.example vars</li>
+<li>./easyrsa init-pki #建立空的pki结构，生成文件和目录</li>
+<li>./easyrsa build-ca #创建ca，密码和cn需要记住将来跟客户端签约时需要认证</li>
+<li>./easyrsa gen-req server nopass #创建服务端证书cn最好不要跟前面的一样</li>
+<li>./easyrsa sign server server #签约服务端证书</li>
+<li><p>./easyrsa gen-dh #创建Diffie-Hellman</p>
+</li>
+<li><p>生成客户端证书</p>
+</li>
+<li>mkdir /home/client &amp;&amp; cd /home/client #创建临时工作目录</li>
+<li>cp -R ~/easy-rsa/ ./ #此处时刚解压的文件</li>
+<li>cd easy-rsa/easyrsa3/</li>
+<li>cp vars.example vars</li>
+<li>./easyrsa init-pki</li>
+<li><p>./easyrsa gen-req username #生成用户的证书，输入密码为登陆认证时的密码<strong>*</strong></p>
+</li>
+<li><p>客户签约（签约后才可以使用vpn）</p>
+</li>
+<li>cd /etc/openvpn/easy-rsa/easyrsa3/</li>
+<li>./easyrsa import-req /home/client/easy-rsa/easyrsa3/pki/reqs/username.req username #导入req</li>
+<li><p>./easyrsa sign client username #用户签约，根据提示输入服务端ca密码</p>
+</li>
+<li><p>整理服务端证书</p>
+</li>
+<li>mkdir /etc/openvpn/keys</li>
+<li>cp /etc/openvpn/easy-rsa/easyrsa3/pki/ca.crt /etc/openvpn/keys</li>
+<li>cp /etc/openvpn/easy-rsa/easyrsa3/pki/private/server.key /etc/openvpn/keys</li>
+<li>cp /etc/openvpn/easy-rsa/easyrsa3/pki/issued/server.crt /etc/openvpn/keys</li>
+<li><p>cp /etc/openvpn/easy-rsa/easyrsa3/pki/dh.pem /etc/openvpn/keys</p>
+</li>
+<li><p>整理客户端证书</p>
+</li>
+<li>mkdir /home/myclient</li>
+<li>cp /etc/openvpn/easy-rsa/easyrsa3/pki/ca.crt /home/myclient/</li>
+<li>cp /etc/openvpn/easy-rsa/easyrsa3/pki/issued/username.crt /home/myclient/</li>
+<li>cp /home/client/easy-rsa/easyrsa3/pki/private/username.key /home/myclient/</li>
+<li>cp /usr/share/doc/openvpn-2.4.4/sample/sample-config-files/client.conf /home/myclient/</li>
+<li>mv client.conf client.ovpn</li>
+</ul>
+</li>
+<li>配置文件修改</li>
+<li>设置开机启动服务</li>
+<li>Linux系统配置<ul>
+<li>开启转发功能</li>
+<li>设置iptables</li>
+</ul>
+</li>
+</ul>
+<h4 id="Client端搭建（内网服务器Centos7-4）"><a href="#Client端搭建（内网服务器Centos7-4）" class="headerlink" title="Client端搭建（内网服务器Centos7.4）"></a>Client端搭建（内网服务器Centos7.4）</h4><ul>
+<li>yum install -y openvpn</li>
+<li>配置文件修改</li>
+<li>openvpn –daemon –cd /etc/openvpn/ –config client.ovpn –log-append /var/log/openvpn.log –askpass</li>
+<li>自动启动脚本：</li>
+<li>设置iptables</li>
+</ul>
+<h4 id="路由器设置（H3C-ER3260G2）"><a href="#路由器设置（H3C-ER3260G2）" class="headerlink" title="路由器设置（H3C ER3260G2）"></a>路由器设置（H3C ER3260G2）</h4><ul>
+<li>添加静态路由</li>
+<li>设置策略路由</li>
+</ul>
+<h4 id="将vpn认证由证书变为用户密码方式"><a href="#将vpn认证由证书变为用户密码方式" class="headerlink" title="将vpn认证由证书变为用户密码方式"></a>将vpn认证由证书变为用户密码方式</h4><ul>
+<li>待补充</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/01/inner_to_outer_openvpn/" data-id="cjj3l2m6h0005e4vx2mt0l87f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Re03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/24/Re03/" class="article-date">
@@ -134,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjisy93gf0002dcvxpcxfbe1m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjj3l2m6h0008e4vx7n9xexbt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
@@ -204,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjisy93fz0001dcvxhwwpx3ni" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjj3l2m5m0000e4vxhenhj2yu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -284,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjisy93gf0005dcvxugpu2itv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjj3l2m610001e4vxizi8w9hd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -361,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjisy93gf0004dcvxk25wwv2r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjj3l2m6h0004e4vx3bosy4xl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,7 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjisy93fz0000dcvx0o0d4gif" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjj3l2m610003e4vx9sy3gpa6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,7 +560,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
     </div>
   </div>
 
@@ -449,7 +570,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
+      <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
     </div>
   </div>
 
@@ -458,7 +579,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
     </div>
   </div>
 
@@ -469,6 +590,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/07/01/inner_to_outer_openvpn/">openvpn</a>
+          </li>
         
           <li>
             <a href="/2018/06/24/Re03/">regular expression 03</a>
@@ -484,10 +609,6 @@
         
           <li>
             <a href="/2018/06/13/CD02/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/13/CD01/">(no title)</a>
           </li>
         
       </ul>
