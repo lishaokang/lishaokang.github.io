@@ -64,8 +64,8 @@
   
     <article id="post-inner_to_outer_openvpn" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/07/01/inner_to_outer_openvpn/" class="article-date">
-  <time datetime="2018-06-30T16:00:00.000Z" itemprop="datePublished">2018-07-01</time>
+    <a href="/2018/07/09/inner_to_outer_openvpn/" class="article-date">
+  <time datetime="2018-07-08T16:00:00.000Z" itemprop="datePublished">2018-07-09</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/01/inner_to_outer_openvpn/">openvpn</a>
+      <a class="article-title" href="/2018/07/09/inner_to_outer_openvpn/">openvpn</a>
     </h1>
   
 
@@ -84,9 +84,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="企业内网到阿里云内网互通解决方案"><a href="#企业内网到阿里云内网互通解决方案" class="headerlink" title="企业内网到阿里云内网互通解决方案"></a>企业内网到阿里云内网互通解决方案</h2><h4 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h4><ul>
-<li>待补充</li>
-</ul>
+        <h2 id="企业内网到阿里云内网互通解决方案"><a href="#企业内网到阿里云内网互通解决方案" class="headerlink" title="企业内网到阿里云内网互通解决方案"></a>企业内网到阿里云内网互通解决方案</h2><h4 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h4><p><img src="../network.png" alt="image"></p>
 <h4 id="Server端搭建（云服务器Centos7-4）"><a href="#Server端搭建（云服务器Centos7-4）" class="headerlink" title="Server端搭建（云服务器Centos7.4）"></a>Server端搭建（云服务器Centos7.4）</h4><ul>
 <li><p>openvpn install</p>
 <ul>
@@ -107,8 +105,8 @@
 </li>
 <li>cp vars.example vars</li>
 <li>./easyrsa init-pki #建立空的pki结构，生成文件和目录</li>
-<li>./easyrsa build-ca #创建ca，密码和cn需要记住将来跟客户端签约时需要认证</li>
-<li>./easyrsa gen-req server nopass #创建服务端证书cn最好不要跟前面的一样</li>
+<li>./easyrsa build-ca #创建ca，密码和cn需要记住将来跟客户端签约时需要认证fangtang2018 doraemon</li>
+<li>./easyrsa gen-req server nopass #创建服务端证书cn最好不要跟前面的一样deploy</li>
 <li>./easyrsa sign server server #签约服务端证书</li>
 <li><p>./easyrsa gen-dh #创建Diffie-Hellman</p>
 </li>
@@ -119,7 +117,7 @@
 <li>cd easy-rsa/easyrsa3/</li>
 <li>cp vars.example vars</li>
 <li>./easyrsa init-pki</li>
-<li><p>./easyrsa gen-req username #生成用户的证书，输入密码为登陆认证时的密码<strong>*</strong></p>
+<li><p>./easyrsa gen-req username #生成用户的证书，输入密码为登陆认证时的密码fangtangdeploy</p>
 </li>
 <li><p>客户签约（签约后才可以使用vpn）</p>
 </li>
@@ -145,33 +143,55 @@
 <li>mv client.conf client.ovpn</li>
 </ul>
 </li>
-<li>配置文件修改</li>
-<li>设置开机启动服务</li>
+<li><p>配置文件修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> Outer_IP</span><br><span class="line">port 1194</span><br><span class="line">;proto tcp</span><br><span class="line">proto udp</span><br><span class="line">;dev tap</span><br><span class="line">dev tun</span><br><span class="line">;dev-node MyTap</span><br><span class="line">ca /etc/openvpn/keys/ca.crt</span><br><span class="line">cert /etc/openvpn/keys/server.crt</span><br><span class="line">key /etc/openvpn/keys/server.key  <span class="comment"># This file should be kept secret</span></span><br><span class="line">dh /etc/openvpn/keys/dh.pem</span><br><span class="line">;topology subnet</span><br><span class="line">server 10.8.0.0 255.255.255.0</span><br><span class="line">ifconfig-pool-persist ipp.txt</span><br><span class="line">;server-bridge 10.8.0.4 255.255.255.0 10.8.0.50 10.8.0.100</span><br><span class="line">;server-bridge</span><br><span class="line">;push <span class="string">" 192.168.10.0 255.255.255.0"</span> <span class="comment">#向客户端推送的路由信息，假如客户端的IP地址为10.8.0.2，要访问192.168.10.0网段的话，使用这条命令就可以了。</span></span><br><span class="line">;push <span class="string">" 192.168.20.0 255.255.255.0"</span></span><br><span class="line">;client-config-dir ccd</span><br><span class="line">; 192.168.40.128 255.255.255.248</span><br><span class="line">;client-config-dir ccd</span><br><span class="line">; 10.9.0.0 255.255.255.252</span><br><span class="line">;learn-address ./script</span><br><span class="line">;push <span class="string">"dhcp-option DNS 208.67.222.222"</span> <span class="comment">#向客户端推送的DNS信息</span></span><br><span class="line">;push <span class="string">"dhcp-option DNS 208.67.220.220"</span></span><br><span class="line">;client-to-client <span class="comment">#这条命令可以使客户端之间能相互访问，默认设置下客户端间是不能相互访问的。</span></span><br><span class="line">;duplicate-cn</span><br><span class="line">keepalive 10 120 <span class="comment">#定义活动连接保时期限</span></span><br><span class="line">cipher AES-256-CBC</span><br><span class="line">;compress lz4-v2</span><br><span class="line">;push <span class="string">"compress lz4-v2"</span></span><br><span class="line">comp-lzo <span class="comment">#启用允许数据压缩，客户端配置文件也需要有这项。</span></span><br><span class="line">max-clients 100 <span class="comment">#定义最大客户端并发连接数量</span></span><br><span class="line">;user nobody</span><br><span class="line">;group nobody</span><br><span class="line">persist-key</span><br><span class="line">persist-tun</span><br><span class="line">status openvpn-status.log <span class="comment">#把openvpn的一些状态信息写到文件中，比如客户端获得的IP地址。</span></span><br><span class="line">;<span class="built_in">log</span>         openvpn.log <span class="comment">#记录日志，每次重新启动openvpn后删除原有的log信息。也可以自定义log的位置。默认是在/etc/openvpn/目录下。</span></span><br><span class="line">;<span class="built_in">log</span>-append  openvpn.log <span class="comment">#记录日志，每次重新启动openvpn后追加原有的log信息。</span></span><br><span class="line">verb 3 <span class="comment">#设置日志记录冗长级别。</span></span><br><span class="line">;mute 20</span><br><span class="line">explicit-exit-notify 1</span><br><span class="line"><span class="comment">#* push “redirect-gateway def1 bypass-dhcp”[这条命令可以重定向客户端的网关，在进行翻墙时会使用到,注释掉]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机启动服务:systemctl start <a href="mailto:openvpn@server.service" target="_blank" rel="noopener">openvpn@server.service</a></p>
+</li>
 <li>Linux系统配置<ul>
-<li>开启转发功能</li>
-<li>设置iptables</li>
+<li><ul>
+<li>开启路由转发：</li>
+</ul>
+</li>
+<li>echo “net.ipv4.ip_forward = 1” &gt;&gt; /etc/sysctl.conf</li>
+<li>sysctl -p </li>
+<li>防火墙设置：</li>
+<li>yum install iptables-services iptables-devel</li>
+<li>iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j MASQUERADE -o eth0#此处填写网段必须时vpn</li>
 </ul>
 </li>
 </ul>
 <h4 id="Client端搭建（内网服务器Centos7-4）"><a href="#Client端搭建（内网服务器Centos7-4）" class="headerlink" title="Client端搭建（内网服务器Centos7.4）"></a>Client端搭建（内网服务器Centos7.4）</h4><ul>
 <li>yum install -y openvpn</li>
-<li>配置文件修改</li>
-<li>openvpn –daemon –cd /etc/openvpn/ –config client.ovpn –log-append /var/log/openvpn.log –askpass</li>
-<li>自动启动脚本：</li>
-<li>设置iptables</li>
+<li><p>配置文件修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">client</span><br><span class="line">dev tun</span><br><span class="line">proto udp</span><br><span class="line">remote <span class="string">"Server_IP"</span> 1194</span><br><span class="line">resolv-retry infinite</span><br><span class="line">nobind</span><br><span class="line"></span><br><span class="line"><span class="comment"># Downgrade privileges after initialization (non-Windows only)</span></span><br><span class="line">;user nobody</span><br><span class="line">;group nobody</span><br><span class="line"></span><br><span class="line"><span class="comment"># Try to preserve some state across restarts.</span></span><br><span class="line">persist-key</span><br><span class="line">persist-tun</span><br><span class="line"></span><br><span class="line">ca ca.crt</span><br><span class="line">cert xxx.crt</span><br><span class="line">key xxx.key</span><br><span class="line">remote-cert-tls server</span><br><span class="line"></span><br><span class="line"><span class="comment"># If a tls-auth key is used on the server</span></span><br><span class="line"><span class="comment"># then every client must also have the key.</span></span><br><span class="line"><span class="comment">##tls-auth ta.key 1</span></span><br><span class="line">cipher AES-256-CBC</span><br><span class="line">comp-lzo</span><br><span class="line">verb 3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>openvpn –daemon –cd /etc/openvpn/ –config client.ovpn –log-append /var/log/openvpn.log –askpass</p>
+</li>
+<li><p>自动启动脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/expect</span></span><br><span class="line"><span class="built_in">set</span> timeout 30</span><br><span class="line">spawn openvpn --daemon --<span class="built_in">cd</span> /etc/openvpn/ --config client.ovpn --<span class="built_in">log</span>-append /var/<span class="built_in">log</span>/openvpn.log --askpass</span><br><span class="line">expect <span class="string">"Enter Private Key Password:"</span></span><br><span class="line">send <span class="string">"Yourpass\r"</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置iptables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.2.0/24 -j MASQUERADE -o tun0</span><br><span class="line">iptables -t nat -A POSTROUTING -s 10.9.0.0/24 -j MASQUERADE -o em1</span><br><span class="line">iptables -A INPUT -s 10.9.0.0/24  -j ACCEPT</span><br><span class="line">iptables -A INPUT -s 10.8.0.0/24  -j ACCEPT</span><br><span class="line">iptables -A INPUT  -p udp --dport 1194 -j ACCEPT</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h4 id="路由器设置（H3C-ER3260G2）"><a href="#路由器设置（H3C-ER3260G2）" class="headerlink" title="路由器设置（H3C ER3260G2）"></a>路由器设置（H3C ER3260G2）</h4><ul>
-<li>添加静态路由</li>
-<li>设置策略路由</li>
+<li>添加静态路由<ul>
+<li>登录路由器后台–&gt;”高级设置”–&gt;”路由设置”–&gt;”静态路由”–&gt;”新增”</li>
+<li>添加目的地址段为”10.9.0.0/16”,下一调为内部VPN内网地址的路由</li>
+<li>添加目的地址段为”腾讯云内网网段”，下一跳为内部VPN内网地址的路由</li>
 </ul>
-<h4 id="将vpn认证由证书变为用户密码方式"><a href="#将vpn认证由证书变为用户密码方式" class="headerlink" title="将vpn认证由证书变为用户密码方式"></a>将vpn认证由证书变为用户密码方式</h4><ul>
-<li>待补充</li>
+</li>
+<li>设置策略路由<ul>
+<li>策略路由添加各个网段到腾讯云VPN DHCP：”10.8.0.0/16”<--->“内网vlan”</---></li>
+</ul>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/01/inner_to_outer_openvpn/" data-id="cjj3l2m6h0005e4vx2mt0l87f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjeev54o0005hcvxi59h4cl3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
@@ -255,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjj3l2m6h0008e4vx7n9xexbt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjeev5480004hcvx9klnj20x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
@@ -325,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjj3l2m5m0000e4vxhenhj2yu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjeev53d0000hcvxy26ugf1f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -405,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjj3l2m610001e4vxizi8w9hd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjeev54o0008hcvxje78eg0n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -482,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjj3l2m6h0004e4vx3bosy4xl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjeev53s0001hcvxv4macj36" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjj3l2m610003e4vx9sy3gpa6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjeev5480003hcvxk71da69x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -592,7 +612,7 @@
       <ul>
         
           <li>
-            <a href="/2018/07/01/inner_to_outer_openvpn/">openvpn</a>
+            <a href="/2018/07/09/inner_to_outer_openvpn/">openvpn</a>
           </li>
         
           <li>
