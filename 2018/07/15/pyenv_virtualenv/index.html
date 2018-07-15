@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: 正则-回溯引用及前后查找 | Hexo</title>
+  <title>pyenv virtualenv | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/正则-回溯引用及前后查找/index.html">
+  <meta name="description" content="pyenv用法">
+<meta name="keywords" content="python-pyenv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pyenv virtualenv">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/pyenv_virtualenv/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="pyenv用法">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-15T12:43:09.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="pyenv virtualenv">
+<meta name="twitter:description" content="pyenv用法">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,40 +65,97 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/06/24/Re03/" class="archive-article-date">
-  <time datetime="2018-06-23T16:00:00.000Z" itemprop="datePublished">Jun 24</time>
+        <section id="main"><article id="post-pyenv_virtualenv" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/15/pyenv_virtualenv/" class="article-date">
+  <time datetime="2018-07-14T16:00:00.000Z" itemprop="datePublished">2018-07-15</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/24/Re03/">regular expression 03</a>
+    <h1 class="article-title" itemprop="name">
+      pyenv virtualenv
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pyenv多版本管理"><a href="#pyenv多版本管理" class="headerlink" title="pyenv多版本管理"></a>pyenv多版本管理</h2><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>系统自带的Python是2.x，自己需要Python 3.x,此时需要在系统中安装多个Python，但又不能影响系统自带的Python,即需要实现Python的多版本共存,pyenv就是这样一个Python版本管理器。</li>
+</ul>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>yum install -y git gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel</li>
+<li>curl -L <a href="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" target="_blank" rel="noopener">https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer</a> |bash #下载安装pyenv</li>
+<li><p>vi ~/.bash_profile #文件结尾添加</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH="/home/python/.pyenv/bin:$PATH"</span><br><span class="line">eval "$(pyenv init -)"</span><br><span class="line">eval "$(pyenv virtualenv-init -)"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>source ~/.bash_profile #立即生效</p>
+</li>
+<li>pyenv install –list #查看可安装包列表</li>
+<li>pyenv install 3.5.5 #安装3.5.5版本python。因为网络问题安装可能很慢，可以先将包从官网下载下来然后将源文件放在~/.pyenv/cache目录下，如果没有则新建。执行pyenv install 3.5.5 -v这样就走缓存进行安装了。</li>
+<li><p>pyenv versions #查看当前系统中有哪些py版本以及正在使用哪个</p>
+</li>
+<li><p>设置python版本：</p>
+<ul>
+<li><p>pyenv global 3.5.5     </p>
+<ul>
+<li>设置全局python环境版本，切不要在root用户下执行。否则整个需要pyhton执行程序都会被影响</li>
+</ul>
+</li>
+<li><p>pyenv local 3.5.5</p>
+<ul>
+<li>设置从当前工作目录开始向下递归都继承这个设置</li>
+</ul>
+</li>
+<li><p>pyenv shell 3.5.5</p>
+<ul>
+<li>只作用于当前会话</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用virtualenv创建出一个3.5.5版本独立的虚拟包环境，此环境下用pip安装的包不会</p>
+<ul>
+<li>pyenv virtualenv project_355 #使用Virtualenv插件创建版本的命名</li>
+<li>pyenv versions #即可查看刚创建的命名</li>
+<li>mkdir ~/doraemon/project355 #创建项目目录</li>
+<li>cd ~/doraemon/project355 #进入项目目录</li>
+<li>pyenv local projext_355 #这样整个项目都会应用py 3.5.5版本,跳出此目录则应用系统默认的py</li>
+</ul>
+</li>
+</ol>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjjmu0fx9000958vxsk5xct2n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/09/inner_to_outer_openvpn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">openvpn</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

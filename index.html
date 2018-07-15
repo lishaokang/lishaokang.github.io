@@ -62,6 +62,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-pyenv_virtualenv" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/15/pyenv_virtualenv/" class="article-date">
+  <time datetime="2018-07-14T16:00:00.000Z" itemprop="datePublished">2018-07-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/pyenv_virtualenv/">pyenv virtualenv</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pyenv多版本管理"><a href="#pyenv多版本管理" class="headerlink" title="pyenv多版本管理"></a>pyenv多版本管理</h2><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><ul>
+<li>系统自带的Python是2.x，自己需要Python 3.x,此时需要在系统中安装多个Python，但又不能影响系统自带的Python,即需要实现Python的多版本共存,pyenv就是这样一个Python版本管理器。</li>
+</ul>
+<h4 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h4><ol>
+<li>yum install -y git gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel</li>
+<li>curl -L <a href="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" target="_blank" rel="noopener">https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer</a> |bash #下载安装pyenv</li>
+<li><p>vi ~/.bash_profile #文件结尾添加</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH="/home/python/.pyenv/bin:$PATH"</span><br><span class="line">eval "$(pyenv init -)"</span><br><span class="line">eval "$(pyenv virtualenv-init -)"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>source ~/.bash_profile #立即生效</p>
+</li>
+<li>pyenv install –list #查看可安装包列表</li>
+<li>pyenv install 3.5.5 #安装3.5.5版本python。因为网络问题安装可能很慢，可以先将包从官网下载下来然后将源文件放在~/.pyenv/cache目录下，如果没有则新建。执行pyenv install 3.5.5 -v这样就走缓存进行安装了。</li>
+<li><p>pyenv versions #查看当前系统中有哪些py版本以及正在使用哪个</p>
+</li>
+<li><p>设置python版本：</p>
+<ul>
+<li><p>pyenv global 3.5.5     </p>
+<ul>
+<li>设置全局python环境版本，切不要在root用户下执行。否则整个需要pyhton执行程序都会被影响</li>
+</ul>
+</li>
+<li><p>pyenv local 3.5.5</p>
+<ul>
+<li>设置从当前工作目录开始向下递归都继承这个设置</li>
+</ul>
+</li>
+<li><p>pyenv shell 3.5.5</p>
+<ul>
+<li>只作用于当前会话</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用virtualenv创建出一个3.5.5版本独立的虚拟包环境，此环境下用pip安装的包不会</p>
+<ul>
+<li>pyenv virtualenv project_355 #使用Virtualenv插件创建版本的命名</li>
+<li>pyenv versions #即可查看刚创建的命名</li>
+<li>mkdir ~/doraemon/project355 #创建项目目录</li>
+<li>cd ~/doraemon/project355 #进入项目目录</li>
+<li>pyenv local projext_355 #这样整个项目都会应用py 3.5.5版本,跳出此目录则应用系统默认的py</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjjmu0fx9000958vxsk5xct2n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-inner_to_outer_openvpn" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/09/inner_to_outer_openvpn/" class="article-date">
@@ -191,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjefi0da0006hkvxxrji6yj4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjmu0fwp000158vxq8tlj9ty" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
@@ -275,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjefi0cu0005hkvx1n3t78zo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjmu0fx5000858vxt7a407g6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
@@ -345,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjefi0cu0003hkvx8qc49mae" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjmu0fwf000058vxyfxcwv1d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -425,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjefi0ce0002hkvxb4i3z6ap" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjmu0fww000358vx3h03lega" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -502,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjefi0ce0001hkvxw1v3f3a9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjmu0fwz000458vxt4llv39t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -557,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjefi0bj0000hkvx2irqomdz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjmu0fx1000558vxn1pptprv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -580,7 +662,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
     </div>
   </div>
 
@@ -590,7 +672,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
+      <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
     </div>
   </div>
 
@@ -612,6 +694,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/15/pyenv_virtualenv/">pyenv virtualenv</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/09/inner_to_outer_openvpn/">openvpn</a>
           </li>
         
@@ -625,10 +711,6 @@
         
           <li>
             <a href="/2018/06/15/Re01/">regular expression</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/13/CD02/">(no title)</a>
           </li>
         
       </ul>
