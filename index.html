@@ -62,6 +62,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PY-Generator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/23/PY-Generator/" class="article-date">
+  <time datetime="2018-07-22T16:00:00.000Z" itemprop="datePublished">2018-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/23/PY-Generator/">Python-生成器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="生成器表达式Generator-expression"><a href="#生成器表达式Generator-expression" class="headerlink" title="生成器表达式Generator expression"></a>生成器表达式Generator expression</h2><ul>
+<li>语法：<ul>
+<li>(返回值 for 元素 in 可迭代对象 if 条件)</li>
+<li>列表解析式的中括号换成小括号就行了</li>
+<li>返回一个生成器</li>
+</ul>
+</li>
+<li>和列表解析式的区别<ul>
+<li>生成器表达式是<code>按需计算(或称惰性求值、延迟计算)</code>,需要的时候才计算值</li>
+<li>列表解析式是<code>立即返回值</code></li>
+</ul>
+</li>
+<li>生成器<ul>
+<li>可迭代对象</li>
+<li>迭代器</li>
+</ul>
+</li>
+<li>举例：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">g = (<span class="string">"&#123;:04&#125;"</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>))</span><br><span class="line">next(g)<span class="comment">#将第一个值取走</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> g:</span><br><span class="line">    print(x)</span><br><span class="line">print(<span class="string">"~"</span>*<span class="number">40</span>)<span class="comment">#上面已经将值取完所以没有可以获取的值</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> g:</span><br><span class="line">    print(x)</span><br><span class="line">--------------------------------</span><br><span class="line"><span class="number">0002</span></span><br><span class="line"><span class="number">0003</span></span><br><span class="line"><span class="number">0004</span></span><br><span class="line"><span class="number">0005</span></span><br><span class="line"><span class="number">0006</span></span><br><span class="line"><span class="number">0007</span></span><br><span class="line"><span class="number">0008</span></span><br><span class="line"><span class="number">0009</span></span><br><span class="line"><span class="number">0010</span></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong> 总结：延迟计算，返回迭代器，可以迭代，从前到后走完一遍，不能回头 </strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">g = [<span class="string">"&#123;:04&#125;"</span>.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>)]</span><br><span class="line"><span class="comment">#next(g)</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> g:</span><br><span class="line">    print(x)</span><br><span class="line">print(<span class="string">"~"</span>*<span class="number">40</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> g:</span><br><span class="line">    print(x)</span><br><span class="line"><span class="comment">#结果打印两遍0001-0010</span></span><br></pre></td></tr></table></figure>
+<p><strong> 总结：立即计算，返回的不是迭代器，返回可迭代的对象列表，可以从头迭代 </strong></p>
+<p><strong>生成器表达式</strong></p>
+<ul>
+<li>和列表表达式的对比<ul>
+<li>计算方式<ul>
+<li>生成器表达式延时计算，列表解析式立即计算</li>
+</ul>
+</li>
+<li>内存占用<ul>
+<li>单从返回值本身来说，生成器表达式省内存，列表解析式返回新的列表</li>
+<li>生成器没有数据，内存占用极少，但是使用的时候，虽然一个一个返回数据，但是结合起来占用内存也差不多</li>
+<li>列表解析式构造新的列表需要占用内存</li>
+</ul>
+</li>
+<li>计算速度：<ul>
+<li>单从计算时间来看，生成器表达式耗时非常短，列表解析式耗时长</li>
+<li>但是生成器本身并没有返回任何值，只返回了一个生成器对象</li>
+<li>列表解析式构造并返回了一个新列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/23/PY-Generator/" data-id="cjjyeaw2c0005f4vx1fy71v3w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generator/">Generator</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-pyenv_virtualenv" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/15/pyenv_virtualenv/" class="article-date">
@@ -132,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjjmu0fx9000958vxsk5xct2n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjjyeaw2m000bf4vxwpjlzeww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li></ul>
@@ -273,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjmu0fwp000158vxq8tlj9ty" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjyeaw260003f4vxo3zq0t7m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
@@ -357,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjmu0fx5000858vxt7a407g6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjyeaw2j0009f4vx15hfyeld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
@@ -427,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjmu0fwf000058vxyfxcwv1d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjyeaw1p0000f4vxtgiqh9px" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -507,7 +590,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjmu0fww000358vx3h03lega" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjyeaw290004f4vxc0u03oe7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -584,7 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjmu0fwz000458vxt4llv39t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjyeaw2g0008f4vxscl6rihr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -639,7 +722,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjmu0fx1000558vxn1pptprv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjyeaw1y0001f4vxjy2ug7vf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -662,7 +745,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
     </div>
   </div>
 
@@ -672,7 +755,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
+      <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
     </div>
   </div>
 
@@ -694,6 +777,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/23/PY-Generator/">Python-生成器</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/15/pyenv_virtualenv/">pyenv virtualenv</a>
           </li>
         
@@ -707,10 +794,6 @@
         
           <li>
             <a href="/2018/06/19/Re02/">regular expression 02</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/15/Re01/">regular expression</a>
           </li>
         
       </ul>
