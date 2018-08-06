@@ -62,6 +62,125 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PY-Module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/PY-Module/" class="article-date">
+  <time datetime="2018-08-05T16:00:00.000Z" itemprop="datePublished">2018-08-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/06/PY-Module/">PY-Module</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><ul>
+<li>一般来说，编程语言中，库，包，模块是同一种概念，是代码组织方式</li>
+<li>包package，指的是模块组织在一起的和包名同名的目录及其相关文件</li>
+<li>模块：凡是.py文件都可以称作一个模块</li>
+</ul>
+<h5 id="导入语句"><a href="#导入语句" class="headerlink" title="导入语句"></a>导入语句</h5><ul>
+<li>import 模块1[,模块2] ：完全导入</li>
+<li>import … as…:模块别名</li>
+<li>找到指定模块，加载和初始化它，生成模块对象，找不到，抛出ImportError异常</li>
+<li><p>在import所在的作用域的局部命名空间中，增加名称和上一步创建的对象关联</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">2</span>]: <span class="keyword">import</span> functools<span class="comment">#导入模块</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: print(dir())</span><br><span class="line">[<span class="string">'In'</span>, <span class="string">'Out'</span>, <span class="string">'_'</span>, <span class="string">'__'</span>, <span class="string">'___'</span>, <span class="string">'__builtin__'</span>, <span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__loader__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__spec__'</span>, <span class="string">'_dh'</span>, <span class="string">'_i'</span>, <span class="string">'_i1'</span>, <span class="string">'_i2'</span>, <span class="string">'_i3'</span>, <span class="string">'_ih'</span>, <span class="string">'_ii'</span>, <span class="string">'_iii'</span>, <span class="string">'_oh'</span>, <span class="string">'exit'</span>, <span class="string">'functools'</span>, <span class="string">'get_ipython'</span>, <span class="string">'quit'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: print(functools)</span><br><span class="line">&lt;module <span class="string">'functools'</span> <span class="keyword">from</span> <span class="string">'c:\\users\\devops\\appdata\\local\\programs\\python\\python35\\lib\\functools.py'</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: print(functools.wraps)</span><br><span class="line">&lt;function wraps at <span class="number">0x000000C794C18A60</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: <span class="keyword">import</span> os.path<span class="comment">#导入os.path,os加入当前名词空间</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: print(dir())</span><br><span class="line">[<span class="string">'In'</span>, <span class="string">'Out'</span>, <span class="string">'_'</span>, <span class="string">'__'</span>, <span class="string">'___'</span>, <span class="string">'__builtin__'</span>, <span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__loader__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__spec__'</span>, <span class="string">'_dh'</span>, <span class="string">'_i'</span>, <span class="string">'_i1'</span>, <span class="string">'_i2'</span>, <span class="string">'_i3'</span>, <span class="string">'_i4'</span>, <span class="string">'_i5'</span>, <span class="string">'_i6'</span>, <span class="string">'_i7'</span>, <span class="string">'_ih'</span>, <span class="string">'_ii'</span>, <span class="string">'_iii'</span>, <span class="string">'_oh'</span>, <span class="string">'exit'</span>, <span class="string">'functools'</span>, <span class="string">'get_ipython'</span>, <span class="string">'os'</span>, <span class="string">'quit'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: print(os)</span><br><span class="line">&lt;module <span class="string">'os'</span> <span class="keyword">from</span> <span class="string">'c:\\users\\devops\\appdata\\local\\programs\\python\\python35\\lib\\os.py'</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: print(os.path)<span class="comment">#完全限定名称访问path</span></span><br><span class="line">&lt;module <span class="string">'ntpath'</span> <span class="keyword">from</span> <span class="string">'c:\\users\\devops\\appdata\\local\\programs\\python\\python35\\lib\\ntpath.py'</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">10</span>]: <span class="keyword">import</span> os.path <span class="keyword">as</span> osp</span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: print(dir())</span><br><span class="line">[<span class="string">'In'</span>, <span class="string">'Out'</span>, <span class="string">'_'</span>, <span class="string">'__'</span>, <span class="string">'___'</span>, <span class="string">'__builtin__'</span>, <span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__loader__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__spec__'</span>, <span class="string">'_dh'</span>, <span class="string">'_i'</span>, <span class="string">'_i1'</span>, <span class="string">'_i10'</span>, <span class="string">'_i11'</span>, <span class="string">'_i2'</span>, <span class="string">'_i3'</span>, <span class="string">'_i4'</span>, <span class="string">'_i5'</span>, <span class="string">'_i6'</span>, <span class="string">'_i7'</span>, <span class="string">'_i8'</span>, <span class="string">'_i9'</span>, <span class="string">'_ih'</span>, <span class="string">'_ii'</span>, <span class="string">'_iii'</span>, <span class="string">'_oh'</span>, <span class="string">'exit'</span>, <span class="string">'functools'</span>, <span class="string">'get_ipython'</span>, <span class="string">'os'</span>, <span class="string">'osp'</span>, <span class="string">'quit'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: print(osp)</span><br><span class="line">&lt;module <span class="string">'ntpath'</span> <span class="keyword">from</span> <span class="string">'c:\\users\\devops\\appdata\\local\\programs\\python\\python35\\lib\\ntpath.py'</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结：</p>
+<ul>
+<li>导入顶级模块，其名称会加入到本地名词空间中，并绑定到其模块对象</li>
+<li>导入非顶级模块，将其顶级模块加入到本地名词空间中。导入的模块必须使用完全限定名来访问</li>
+<li>如果使用了as，其后的名称直接加入到本地名词空间中，并直接绑定到导入的模块对象</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>语句</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from…import…</td>
+<td>部分导入</td>
+</tr>
+<tr>
+<td>from…import…as…</td>
+<td>别名</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>from语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">13</span>]: <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path,PosixPath<span class="comment">#在当前名词导入该模块的指定成员</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: print(dir())</span><br><span class="line">[.....<span class="string">'Path'</span>, <span class="string">'PosixPath'</span> ]</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: <span class="keyword">from</span> pathlib <span class="keyword">import</span> *<span class="comment">#在当前名词空间导入该模块所有公共成员</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">16</span>]: print(dir())</span><br><span class="line">[..... <span class="string">'Path'</span>, <span class="string">'PosixPath'</span>, <span class="string">'PurePath'</span>, <span class="string">'PurePosixPath'</span>, <span class="string">'PureWindowsPath'</span>, <span class="string">'WindowsPath'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">17</span>]: <span class="keyword">from</span> functools <span class="keyword">import</span> wraps <span class="keyword">as</span> wr<span class="comment">#别名</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">18</span>]: print(dir())</span><br><span class="line">[......<span class="string">'wr'</span>]</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">In [<span class="number">19</span>]: <span class="keyword">from</span> os.path <span class="keyword">import</span> exists<span class="comment">#加载、初始化os.path模块，exists加入本地名词空间并绑定</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: <span class="keyword">if</span> exists(<span class="string">'f:/t'</span>):</span><br><span class="line">    ...:     print(<span class="string">'Found'</span>)</span><br><span class="line">    ...: <span class="keyword">else</span>:</span><br><span class="line">    ...:     print(<span class="string">'Not Found'</span>)</span><br><span class="line">Not Found</span><br><span class="line"></span><br><span class="line">In [<span class="number">21</span>]: print(dir())</span><br><span class="line">[<span class="string">'In'</span>, <span class="string">'Out'</span>, <span class="string">'Path'</span>, <span class="string">'PosixPath'</span>, <span class="string">'PurePath'</span>, <span class="string">'PurePosixPath'</span>, <span class="string">'PureWindowsPath'</span>, <span class="string">'WindowsPath'</span>, <span class="string">'_'</span>, <span class="string">'__'</span>, <span class="string">'___'</span>, <span class="string">'__builtin__'</span>, <span class="string">'__builtins__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__loader__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__spec__'</span>, <span class="string">'_dh'</span>, <span class="string">'_i'</span>, <span class="string">'_i1'</span>, <span class="string">'_i10'</span>, <span class="string">'_i11'</span>, <span class="string">'_i12'</span>, <span class="string">'_i13'</span>, <span class="string">'_i14'</span>, <span class="string">'_i15'</span>, <span class="string">'_i16'</span>, <span class="string">'_i17'</span>, <span class="string">'_i18'</span>, <span class="string">'_i19'</span>, <span class="string">'_i2'</span>, <span class="string">'_i20'</span>, <span class="string">'_i21'</span>, <span class="string">'_i3'</span>, <span class="string">'_i4'</span>, <span class="string">'_i5'</span>, <span class="string">'_i6'</span>, <span class="string">'_i7'</span>, <span class="string">'_i8'</span>, <span class="string">'_i9'</span>, <span class="string">'_ih'</span>, <span class="string">'_ii'</span>, <span class="string">'_iii'</span>, <span class="string">'_oh'</span>, <span class="string">'exists'</span>, <span class="string">'exit'</span>, <span class="string">'functools'</span>, <span class="string">'get_ipython'</span>, <span class="string">'os'</span>, <span class="string">'osp'</span>, <span class="string">'quit'</span>, <span class="string">'wr'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">22</span>]: print(exists)</span><br><span class="line">&lt;function exists at <span class="number">0x000000C79460F1E0</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">23</span>]: <span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">In [<span class="number">24</span>]: print(os.path.exists)</span><br><span class="line">&lt;function exists at <span class="number">0x000000C79460F1E0</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">25</span>]: print(os.path.__dict__[<span class="string">'exists'</span>])</span><br><span class="line">&lt;function exists at <span class="number">0x000000C79460F1E0</span>&gt;</span><br><span class="line"><span class="comment">#上面三种方式获得同一个对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结：</p>
+</li>
+<li>找到from子句中指定的模块，加载并初始化它（注意不是导入）</li>
+<li>对于import子句后的名称<ul>
+<li>先查from子句导入的模块是否具有该名称的属性</li>
+<li>如果不是，则尝试导入该名称的子模块</li>
+<li>还没有找到，则抛出ImportError异常</li>
+<li>这个名称保存到本地名词空间中，如果有as子句，则使用as子句的名称</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">29</span>]: <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line">In [<span class="number">30</span>]: print(Path,id(Path))</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">pathlib</span>.<span class="title">Path</span>'&gt; 857194384056</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">In</span> [31]:</span> <span class="keyword">import</span> pathlib <span class="keyword">as</span> p1</span><br><span class="line"></span><br><span class="line">In [<span class="number">32</span>]: print(dir())</span><br><span class="line">[ ....<span class="string">'p1'</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">33</span>]: print(p1)</span><br><span class="line">&lt;module <span class="string">'pathlib'</span> <span class="keyword">from</span> <span class="string">'c:\\users\\devops\\appdata\\local\\programs\\python\\python35\\lib\\pathlib.py'</span>&gt;</span><br><span class="line"></span><br><span class="line">In [<span class="number">34</span>]: print(p1.Path,id(p1.Path))</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">pathlib</span>.<span class="title">Path</span>'&gt; 857194384056</span></span><br><span class="line"><span class="class">#可以看出导入的名词<span class="title">Path</span>和<span class="title">p1</span>.<span class="title">Path</span>是同一个对象</span></span><br></pre></td></tr></table></figure>
+<h5 id="自定义模块"><a href="#自定义模块" class="headerlink" title="自定义模块"></a>自定义模块</h5><ul>
+<li>自定义模块：.py文件就是模块</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#test1.py</span></span><br><span class="line">print(<span class="string">'This is test1 module'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showmodule</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"&#123;&#125;.a=&#123;&#125;"</span>.format(self.__module__,self))</span><br><span class="line">        print(self.__class__.__name__)</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.showmodule()</span><br><span class="line"></span><br><span class="line"><span class="comment">#test2.py</span></span><br><span class="line"><span class="keyword">import</span> test1</span><br><span class="line"></span><br><span class="line">print(<span class="string">'!'</span>*<span class="number">30</span>)</span><br><span class="line">a = test1.A()</span><br><span class="line">a.showmodule()</span><br><span class="line"></span><br><span class="line"><span class="comment">#test3.py</span></span><br><span class="line"><span class="keyword">from</span> test1 <span class="keyword">import</span> A <span class="keyword">as</span> cls</span><br><span class="line"></span><br><span class="line">a = cls()</span><br><span class="line">a.showmodule()</span><br><span class="line">----------------------------</span><br><span class="line"><span class="comment">#test2和test3打印结果一样</span></span><br><span class="line">This <span class="keyword">is</span> test1 module</span><br><span class="line">test1.a=&lt;test1.A object at <span class="number">0x000000FE9A1C8978</span>&gt;</span><br><span class="line">A</span><br><span class="line">test1.a=&lt;test1.A object at <span class="number">0x000000FE9A1C0438</span>&gt;</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<p><strong>自定义模块命名规范</strong></p>
+<ul>
+<li>模块名就是文件名</li>
+<li>模块名必须符合标识符的要求，非数字开头的字母数字和下划线的组合。test-module.py这样的文件名不能作为模块名</li>
+<li>不要使用系统模块名来避免冲突，除非你明确知道这个模块的用途</li>
+<li>通常模块名为全小写，下划线来分割</li>
+</ul>
+<h5 id="模块搜索顺序"><a href="#模块搜索顺序" class="headerlink" title="模块搜索顺序"></a>模块搜索顺序</h5><ul>
+<li><p>使用sys.path查看搜索顺序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> sys.path:</span><br><span class="line">    print(p)</span><br><span class="line">-----------------------</span><br><span class="line">F:\pycharm_product\python\<span class="number">1207</span></span><br><span class="line">F:\pycharm_product\python</span><br><span class="line">C:\Users\devops\AppData\Local\Programs\Python\Python35\python35.zip</span><br><span class="line">C:\Users\devops\AppData\Local\Programs\Python\Python35\DLLs</span><br><span class="line">C:\Users\devops\AppData\Local\Programs\Python\Python35\lib</span><br><span class="line">C:\Users\devops\AppData\Local\Programs\Python\Python35</span><br><span class="line">C:\Users\devops\AppData\Local\Programs\Python\Python35\lib\site-packages</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示结果为，python模块的路径搜索顺序</p>
+</li>
+<li>当加载一个模块的时候，需要从这些搜索路径中从前到后依次查找，不搜索这些目录的子目录，搜索到就加载，搜索不到就抛异常</li>
+<li>路径可以是字典，zip文件，egg文件(.egg文件，由setuptools创建的包，第三方库常用格式。添加了元素(版本号、依赖项等信息的zip文件))</li>
+<li>路径顺序为：<ul>
+<li>程序主目录，程序运行的主程序脚本所在的目录</li>
+<li>pythonpath目录，环境变量pythonpath设置的目录也是搜索模块的路径</li>
+<li>标准库目录，python自带库模块所在目录</li>
+<li>sys.path可以被修改，追加新的目录</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/PY-Module/" data-id="cjkiewdyb0005hsvxhnjqr4rk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python模块化/">Python模块化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PY-Generator" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/23/PY-Generator/" class="article-date">
@@ -133,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/23/PY-Generator/" data-id="cjjyeaw2c0005f4vx1fy71v3w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/23/PY-Generator/" data-id="cjkiewdw50001hsvx2qdfxbpf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generator/">Generator</a></li></ul>
@@ -215,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjjyeaw2m000bf4vxwpjlzeww" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/15/pyenv_virtualenv/" data-id="cjkiewdyr000dhsvx32uspzz8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li></ul>
@@ -356,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjjyeaw260003f4vxo3zq0t7m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/09/inner_to_outer_openvpn/" data-id="cjkiewdyb0008hsvxq5a68p58" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
@@ -440,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjjyeaw2j0009f4vx15hfyeld" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/Re03/" data-id="cjkiewdyr0009hsvxueofzhz4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
@@ -510,7 +629,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjjyeaw1p0000f4vxtgiqh9px" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Re02/" data-id="cjkiewdxv0004hsvx0rx71chn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li></ul>
@@ -590,7 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjjyeaw290004f4vxc0u03oe7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/15/Re01/" data-id="cjkiewdyb0007hsvxvyhhmv5f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
@@ -667,7 +786,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjjyeaw2g0008f4vxscl6rihr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD02/" data-id="cjkiewdyr000chsvx7p2rksdg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -722,7 +841,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjjyeaw1y0001f4vxjy2ug7vf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/13/CD01/" data-id="cjkiewdvp0000hsvxfc5gul2y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -745,7 +864,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python模块化/">Python模块化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
     </div>
   </div>
 
@@ -755,7 +874,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
+      <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Python模块化/" style="font-size: 10px;">Python模块化</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
     </div>
   </div>
 
@@ -764,7 +883,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
     </div>
   </div>
 
@@ -775,6 +894,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/06/PY-Module/">PY-Module</a>
+          </li>
         
           <li>
             <a href="/2018/07/23/PY-Generator/">Python-生成器</a>
@@ -790,10 +913,6 @@
         
           <li>
             <a href="/2018/06/24/Re03/">regular expression 03</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/19/Re02/">regular expression 02</a>
           </li>
         
       </ul>
