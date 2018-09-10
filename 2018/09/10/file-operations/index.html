@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python file operations | Li&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="python文件操作">
+<meta name="keywords" content="文件操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python file operations">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/file-operations/index.html">
+<meta property="og:site_name" content="Li&#39;s blog">
+<meta property="og:description" content="python文件操作">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-10T15:26:04.135Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python file operations">
+<meta name="twitter:description" content="python文件操作">
+  
+    <link rel="alternate" href="/atom.xml" title="Li&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Li&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-file-operations" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/10/file-operations/" class="article-date">
+  <time datetime="2018-09-09T16:00:00.000Z" itemprop="datePublished">2018-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python file operations
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="文件IO常用操作"><a href="#文件IO常用操作" class="headerlink" title="文件IO常用操作"></a>文件IO常用操作</h3><ul>
+<li>open 打开</li>
+<li>read 读取</li>
+<li>write 写入</li>
+<li>close 关闭</li>
+<li>readline 行读取</li>
+<li>readlines 多行读取</li>
+<li>seek 文件指针操作</li>
+<li><p>tell 指针位置打印</p>
+</li>
+<li><p>打开操作open，打开一个文件，返回一个文件对象（流对象）和文件描述符。打开失败则返回异常</p>
+</li>
+<li>基本使用：如下创建一个文件test，然后打开，用完关闭</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: f = open(<span class="string">'test'</span>)<span class="comment">#打开一个存在的文件，w，x如果不存在则创建</span></span><br><span class="line">In [<span class="number">2</span>]: print(f.read())<span class="comment">#读取文件所有内容</span></span><br><span class="line">In [<span class="number">3</span>]: f.close()<span class="comment">#关闭文件</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>文件操作中，最常用的操作就是读和写</li>
+<li>文件访问的模式有两种：文本模式和二进制模式，不同模式下，操作函数不尽相同，表现的结果也不一样</li>
+</ul>
+<p><strong>open的参数</strong></p>
+<ul>
+<li>file 打开或者要创建的文件名，如果不指定路径默认是当前路径</li>
+<li>Mode模式：<ul>
+<li>r 缺省的，表示只读打开</li>
+<li>w只写打开</li>
+<li>x创建并写入一个新文件</li>
+<li>a写入打开，如果文件存在，则追加</li>
+<li>b二进制模式</li>
+<li>t 缺省的，文本模式</li>
+<li><ul>
+<li>读写打开一个文件。给原来只读、只写方式打开提供缺失的读或者写能力</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#r模式</span></span><br><span class="line">In [<span class="number">5</span>]: f = open(<span class="string">'test'</span>)</span><br><span class="line">In [<span class="number">6</span>]: f.read()</span><br><span class="line">Out[<span class="number">6</span>]: <span class="string">''</span></span><br><span class="line">In [<span class="number">7</span>]: f.write(<span class="string">'abc'</span>)<span class="comment">#只读模式无法写入</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">UnsupportedOperation       Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-7</span>-cd7fff53b2a7&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f.write('abc')</span><br><span class="line">UnsupportedOperation: <span class="keyword">not</span> writable</span><br><span class="line">In [<span class="number">8</span>]: f.close</span><br><span class="line">Out[<span class="number">8</span>]: &lt;function TextIOWrapper.close&gt;</span><br><span class="line">In [<span class="number">9</span>]: f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#r模式打开一个不存在的文件：</span></span><br><span class="line">In [<span class="number">10</span>]: f = open(<span class="string">'hehe'</span>)</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">FileNotFoundError          Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-10</span><span class="number">-7</span>d3bef1cb7cb&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f = open('hehe')</span><br><span class="line">FileNotFoundError: [Errno <span class="number">2</span>] No such file <span class="keyword">or</span> directory: <span class="string">'hehe'</span><span class="comment">##提示没有该文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#w模式：</span></span><br><span class="line">In [<span class="number">12</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w'</span>)<span class="comment">#只写打开</span></span><br><span class="line">In [<span class="number">13</span>]: f.write(<span class="string">'abcd'</span>)</span><br><span class="line">Out[<span class="number">13</span>]: <span class="number">4</span></span><br><span class="line">In [<span class="number">14</span>]: f.close()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>总结：</li>
+<li>open默认是只读模式r打开<code>已存在</code>的文件</li>
+<li>r：<pre><code>* 只读打开文件，如果使用write方法，会抛异常
+* 如果文件不存在，抛出FileNotFoundError异常
+</code></pre></li>
+<li>w：<pre><code>* 表示只写方式打开，如果读取则抛异常
+* 如果文件不存在，则直接创建文件
+* 如果文件存在，`则清空文件内容`
+</code></pre></li>
+<li><p>x:</p>
+<pre><code>* 文件不存在，创建文件，`并只写方式打开`
+* 如果文件存在，抛出FileExistsError异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">15</span>]: f = open(<span class="string">'test2'</span>,<span class="string">'x'</span>)</span><br><span class="line">In [<span class="number">16</span>]: f.read()</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">UnsupportedOperation       Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-16</span>-bacd0e0f09a3&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f.read()</span><br><span class="line">UnsupportedOperation: <span class="keyword">not</span> readable</span><br><span class="line">In [<span class="number">17</span>]: f.write(<span class="string">'abcde'</span>)</span><br><span class="line">Out[<span class="number">17</span>]: <span class="number">5</span></span><br><span class="line">In [<span class="number">18</span>]: f.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a:</p>
+<pre><code>* 文件存在，`只写打开`，追加内容
+* 文件不存在，则创建后，只写打开，追加内容
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">19</span>]: f = open(<span class="string">'test2'</span>,<span class="string">'a'</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">20</span>]: f.read()<span class="comment">#不可读</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">UnsupportedOperation       Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-20</span>-bacd0e0f09a3&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f.read()</span><br><span class="line"></span><br><span class="line">UnsupportedOperation: <span class="keyword">not</span> readable</span><br><span class="line"></span><br><span class="line">In [<span class="number">21</span>]: f.write(<span class="string">'abcdef'</span>)</span><br><span class="line">Out[<span class="number">21</span>]: <span class="number">6</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">22</span>]: f.close()</span><br><span class="line"></span><br><span class="line">In [<span class="number">23</span>]: cat test2</span><br><span class="line">abcdeabcdef</span><br><span class="line">In [<span class="number">24</span>]: f = open(<span class="string">'test2'</span>,<span class="string">'a'</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">26</span>]: f.write(<span class="string">'\n hello'</span>)</span><br><span class="line">Out[<span class="number">26</span>]: <span class="number">7</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">27</span>]: f.close()</span><br><span class="line"></span><br><span class="line">In [<span class="number">28</span>]: cat test2</span><br><span class="line">abcdeabcdef</span><br><span class="line"> hello</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>r是只读，wxa都是只写</p>
+</li>
+<li><p>wxa都可以产生新文件，w不管文件存在与否，都会生成全新内容的文件；a不管文件是否存在都能在打开的文件尾部追加；x必须要求文件事先不存在，自己造一个新文件</p>
+</li>
+<li><p>文本模式t</p>
+<ul>
+<li>字符流，将文件的字节按照某种字符编码理解，按照字符操作。open的默认mode就是rt</li>
+</ul>
+</li>
+<li>二进制模式b<ul>
+<li>字节流，将文件就按照字节理解，与字符编码无关。二进制模式操作时，字节操作使用bytes类型</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#二进制模式读写举例：</span></span><br><span class="line">In [<span class="number">30</span>]: f = open(<span class="string">'test2'</span>,<span class="string">'rb'</span>)</span><br><span class="line">In [<span class="number">31</span>]: s = f.read()</span><br><span class="line">In [<span class="number">32</span>]: print(type(s))</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bytes</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">In</span> [33]:</span> f.close()</span><br><span class="line">In [<span class="number">34</span>]: f = open(<span class="string">'test2'</span>,<span class="string">'wb'</span>)</span><br><span class="line">In [<span class="number">36</span>]: s = f.write(<span class="string">'Thunk'</span>.encode())<span class="comment">#将返回值赋予s</span></span><br><span class="line">In [<span class="number">37</span>]: print(s)</span><br><span class="line"><span class="number">5</span></span><br><span class="line">In [<span class="number">38</span>]: f.close()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>+：<ul>
+<li>为rwax提供缺失的读写功能，但是获取文件对象依旧按照rwax自己的特征。</li>
+<li>+不能单独使用，可以认为它是为前面的模式字符做增强功能</li>
+</ul>
+</li>
+</ul>
+<p><strong>文件指针</strong></p>
+<ul>
+<li>文件指针指向当前字节位置</li>
+<li>mode = r指针起始在0</li>
+<li>mode = a指针起始在EOF</li>
+<li><code>flush()无法挪动指针</code></li>
+<li>tell()显示指针当前位置</li>
+<li>seek(offest[,whence]):移动文件指针位置。offest偏移多少字节，whence从哪里开始<ul>
+<li>文本模式下：</li>
+<li>whence 0缺省值，表示从头开始，offest只能正整数</li>
+<li>whence 1表示从当前位置，offest只接受0</li>
+<li>whence 2表示从EOF开始，offest只接受0</li>
+<li>支持从开头向后的偏移方式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#举例：</span></span><br><span class="line">In [<span class="number">1</span>]: f = open(<span class="string">'f:/test.txt'</span>,<span class="string">'r+'</span>)</span><br><span class="line">In [<span class="number">2</span>]: f.tell()<span class="comment">#开始</span></span><br><span class="line">Out[<span class="number">2</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">3</span>]: f.write(<span class="string">'woshi lishaokang nihao a Hello world'</span>)</span><br><span class="line">Out[<span class="number">3</span>]: <span class="number">36</span></span><br><span class="line">In [<span class="number">4</span>]: f.tell()<span class="comment">#EOF</span></span><br><span class="line">Out[<span class="number">4</span>]: <span class="number">36</span></span><br><span class="line">In [<span class="number">5</span>]: f.seek(<span class="number">0</span>)<span class="comment">#将指针移动到开始</span></span><br><span class="line">Out[<span class="number">5</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">6</span>]: f.read()</span><br><span class="line">Out[<span class="number">6</span>]: <span class="string">'woshi lishaokang nihao a Hello world'</span></span><br><span class="line">In [<span class="number">7</span>]: f.tell()</span><br><span class="line">Out[<span class="number">7</span>]: <span class="number">36</span></span><br><span class="line">In [<span class="number">8</span>]: f.seek(<span class="number">2</span>,<span class="number">0</span>)<span class="comment">#指针移动到开始，偏移两个字节，到达第二个字节</span></span><br><span class="line">Out[<span class="number">8</span>]: <span class="number">2</span></span><br><span class="line">In [<span class="number">9</span>]: f.tell()</span><br><span class="line">Out[<span class="number">9</span>]: <span class="number">2</span></span><br><span class="line">In [<span class="number">10</span>]: f.read(<span class="number">1</span>)<span class="comment">#读取一个字节，即第三个字节被读取</span></span><br><span class="line">Out[<span class="number">10</span>]: <span class="string">'s'</span></span><br><span class="line">In [<span class="number">11</span>]: f.seek(<span class="number">2</span>,<span class="number">1</span>)<span class="comment">#此处报错，因为whence=1从当前位置时，offest只接受0</span></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">UnsupportedOperation                      Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-11</span><span class="number">-8</span>ebd033df768&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f.seek(2,1)</span><br><span class="line"></span><br><span class="line">UnsupportedOperation: can<span class="string">'t do nonzero cur-relative seeks</span></span><br><span class="line"><span class="string">In [12]: f.seek(2,0)</span></span><br><span class="line"><span class="string">Out[12]: 2</span></span><br><span class="line"><span class="string">In [13]: f.tell()</span></span><br><span class="line"><span class="string">Out[13]: 2</span></span><br><span class="line"><span class="string">In [14]: f.seek(0,1)#从当前位置，不允许偏移</span></span><br><span class="line"><span class="string">Out[14]: 2</span></span><br><span class="line"><span class="string">In [15]: f.seek(0,2)#从EOF开始，不允许偏移</span></span><br><span class="line"><span class="string">Out[15]: 36</span></span><br><span class="line"><span class="string">In [16]: f.tell()</span></span><br><span class="line"><span class="string">Out[16]: 36</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#中文</span></span><br><span class="line"><span class="string">In [20]: f = open('</span>f:/test1.txt<span class="string">','</span>r+<span class="string">')</span></span><br><span class="line"><span class="string">In [21]: f.write('</span>测试中文<span class="string">')</span></span><br><span class="line"><span class="string">Out[21]: 4</span></span><br><span class="line"><span class="string">In [22]: f.tell()</span></span><br><span class="line"><span class="string">Out[22]: 8</span></span><br><span class="line"><span class="string">In [23]: f.close()</span></span><br><span class="line"><span class="string">In [24]: f = open('</span>f:/test1.txt<span class="string">','</span>r+<span class="string">')</span></span><br><span class="line"><span class="string">In [25]: f.read(3)</span></span><br><span class="line"><span class="string">Out[25]: '</span>测试中<span class="string">'</span></span><br><span class="line"><span class="string">In [26]: f.seek(1)</span></span><br><span class="line"><span class="string">Out[26]: 1</span></span><br><span class="line"><span class="string">In [27]: f.tell()</span></span><br><span class="line"><span class="string">Out[27]: 1</span></span><br><span class="line"><span class="string">In [28]: f.read()#当中文取出一个字节后，字符不完整所以报错如下</span></span><br><span class="line"><span class="string">---------------------------------------------------------------------------</span></span><br><span class="line"><span class="string">UnicodeDecodeError                        Traceback (most recent call last)</span></span><br><span class="line"><span class="string">&lt;ipython-input-28-bacd0e0f09a3&gt; in &lt;module&gt;()</span></span><br><span class="line"><span class="string">----&gt; 1 f.read()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">UnicodeDecodeError: '</span>gbk<span class="string">' codec can'</span>t decode byte <span class="number">0xfd</span> <span class="keyword">in</span> position <span class="number">6</span>: incomplete multibyte sequence</span><br></pre></td></tr></table></figure>
+<ul>
+<li>二进制模式下：<ul>
+<li>whence 0缺省值，表示从开头开始，offest只能是正整数</li>
+<li>whence 1表示从当前位置，offest可正可负</li>
+<li>whence 2表示从EOF开始，offest可正可负</li>
+<li>二进制模式支持任意起点的偏移，从头、从尾、从中间位置开始所以seek可以超界，但是<code>向前seek的时候，不能超界</code>，否则抛异常</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">48</span>]: f = open(<span class="string">'f:/test.txt'</span>,<span class="string">'rb+'</span>)</span><br><span class="line">In [<span class="number">49</span>]: f.tell()<span class="comment">#起始</span></span><br><span class="line">Out[<span class="number">49</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">50</span>]: f.read()</span><br><span class="line">Out[<span class="number">50</span>]: <span class="string">b'woshi lishaokang nihao a Hello world'</span></span><br><span class="line">In [<span class="number">51</span>]: f.tell()</span><br><span class="line">Out[<span class="number">51</span>]: <span class="number">36</span></span><br><span class="line">In [<span class="number">52</span>]: f.write(<span class="string">b'abc'</span>)</span><br><span class="line">Out[<span class="number">52</span>]: <span class="number">3</span></span><br><span class="line">In [<span class="number">53</span>]: f.seek(<span class="number">0</span>)</span><br><span class="line">Out[<span class="number">53</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">54</span>]: f.seek(<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">54</span>]: <span class="number">2</span></span><br><span class="line">In [<span class="number">55</span>]: f.read()</span><br><span class="line">Out[<span class="number">55</span>]: <span class="string">b'shi lishaokang nihao a Hello worldabc'</span></span><br><span class="line">In [<span class="number">56</span>]: f.seek(<span class="number">-2</span>,<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">56</span>]: <span class="number">37</span></span><br><span class="line">In [<span class="number">57</span>]: f.seek(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">Out[<span class="number">57</span>]: <span class="number">41</span></span><br><span class="line">In [<span class="number">58</span>]: f.read()</span><br><span class="line">Out[<span class="number">58</span>]: <span class="string">b''</span></span><br><span class="line">In [<span class="number">59</span>]: f.seek(<span class="number">-2</span>,<span class="number">2</span>)<span class="comment">#从EOF开始，向前偏移两个字节</span></span><br><span class="line">Out[<span class="number">59</span>]: <span class="number">37</span></span><br><span class="line">In [<span class="number">60</span>]: f.read()</span><br><span class="line">Out[<span class="number">60</span>]: <span class="string">b'bc'</span></span><br><span class="line">In [<span class="number">61</span>]: f.seek(<span class="number">-20</span>,<span class="number">2</span>)</span><br><span class="line">Out[<span class="number">61</span>]: <span class="number">19</span></span><br><span class="line">In [<span class="number">62</span>]: f.seek(<span class="number">-20</span>,<span class="number">1</span>)<span class="comment">#从当前指针开始向前，此处偏移量超界</span></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">OSError                                   Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-62</span><span class="number">-769</span>a432c653d&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f.seek(-20,1)</span><br><span class="line"></span><br><span class="line">OSError: [Errno <span class="number">22</span>] Invalid argument</span><br><span class="line">In [<span class="number">63</span>]: f.seek(<span class="number">-19</span>,<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">63</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">64</span>]: f.close()</span><br></pre></td></tr></table></figure>
+<p><strong>buffering:缓冲区</strong></p>
+<ul>
+<li>-1表示使用缺省大小的buffer。如果是二进制模式，使用io.DEFAULT_BUFFER_SIZE值，默认是4096或者8192.如果是文本模式，如果是终端设备，是行缓存方式，如果不是，则使用二进制模式的策略</li>
+<li>0只在二进制模式使用，表示关闭buffer</li>
+<li>1只在文本模式使用，表示行缓冲。意思是<code>见到换行符</code>就</li>
+<li><p>大于1用于指定buffer的大小</p>
+</li>
+<li><p>buffer缓冲区：</p>
+<ul>
+<li>缓冲区一个内存空间，一般来说是一个FIFO队列，到缓冲区满了或者达到阈值，数据才会到磁盘</li>
+<li>()将缓冲区数据写入磁盘</li>
+<li>close()关闭前会调用()</li>
+<li>io.DEFAULT_BUFFER_SIZE缺省缓冲区大小，字节<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#二进制模式</span></span><br><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> io</span><br><span class="line">In [<span class="number">2</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w+b'</span>)<span class="comment">#二进制读写方式打开</span></span><br><span class="line">In [<span class="number">3</span>]: print(io.DEFAULT_BUFFER_SIZE)<span class="comment">#查看buffer默认大小</span></span><br><span class="line"><span class="number">8192</span></span><br><span class="line">In [<span class="number">4</span>]: f.write(<span class="string">'kangedu.com'</span>.encode())<span class="comment">#写入bytes</span></span><br><span class="line">Out[<span class="number">4</span>]: <span class="number">11</span></span><br><span class="line">In [<span class="number">5</span>]: cat test</span><br><span class="line">In [<span class="number">6</span>]: f.seek(<span class="number">0</span>)</span><br><span class="line">Out[<span class="number">6</span>]: <span class="number">0</span></span><br><span class="line">In [<span class="number">7</span>]: cat test</span><br><span class="line">kangedu.com</span><br><span class="line">In [<span class="number">8</span>]: f.write(<span class="string">'www.kangedu.com'</span>.encode())</span><br><span class="line">Out[<span class="number">8</span>]: <span class="number">15</span></span><br><span class="line">In [<span class="number">9</span>]: f.()</span><br><span class="line">In [<span class="number">10</span>]: f.close()</span><br><span class="line">In [<span class="number">11</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w+b'</span>,<span class="number">4</span>)<span class="comment">#打开buffering为4字节</span></span><br><span class="line">In [<span class="number">12</span>]: f.write(<span class="string">b'mag'</span>)</span><br><span class="line">Out[<span class="number">12</span>]: <span class="number">3</span></span><br><span class="line">In [<span class="number">13</span>]: cat test<span class="comment">#插入三个字节时，cat无内容</span></span><br><span class="line">In [<span class="number">14</span>]: f.write(<span class="string">b'edu'</span>)<span class="comment">#再次插入大于4字节大小，buffer已满所以出发操作</span></span><br><span class="line">Out[<span class="number">14</span>]: <span class="number">3</span></span><br><span class="line">In [<span class="number">15</span>]: cat test<span class="comment">#将上次的内容同步到硬盘</span></span><br><span class="line">mag</span><br><span class="line">In [<span class="number">16</span>]: f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#文本模式</span></span><br><span class="line">In [<span class="number">17</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w+'</span>,<span class="number">1</span>)<span class="comment">#buffer为1时，检测到换行符则()到硬盘</span></span><br><span class="line">In [<span class="number">18</span>]: cat test</span><br><span class="line">In [<span class="number">19</span>]: f.write(<span class="string">'mag'</span>)</span><br><span class="line">Out[<span class="number">19</span>]: <span class="number">3</span></span><br><span class="line">In [<span class="number">20</span>]: f.write(<span class="string">'abcdef'</span>*<span class="number">4</span>)</span><br><span class="line">Out[<span class="number">20</span>]: <span class="number">24</span></span><br><span class="line">In [<span class="number">21</span>]: cat test</span><br><span class="line">In [<span class="number">22</span>]: f.write(<span class="string">'\n'</span>)<span class="comment">#检测到换行符即将行内的和之前缓冲区中的文件全部</span></span><br><span class="line">Out[<span class="number">22</span>]: <span class="number">1</span></span><br><span class="line">In [<span class="number">23</span>]: cat test</span><br><span class="line">magabcdefabcdefabcdefabcdef</span><br><span class="line">In [<span class="number">24</span>]: f.write(<span class="string">'Hello\nPytehon'</span>)<span class="comment">#</span></span><br><span class="line">Out[<span class="number">24</span>]: <span class="number">13</span></span><br><span class="line">In [<span class="number">26</span>]: cat test</span><br><span class="line">magabcdefabcdefabcdefabcdef</span><br><span class="line">Hello</span><br><span class="line">Pytehon</span><br><span class="line">In [<span class="number">27</span>]: f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#buffering&gt;1,使用指定大小的缓冲区（无作用，按default大小生效）</span></span><br><span class="line">In [<span class="number">67</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w+'</span>,<span class="number">15</span>)</span><br><span class="line">In [<span class="number">68</span>]: f.write(<span class="string">'mage'</span>)</span><br><span class="line">Out[<span class="number">68</span>]: <span class="number">4</span></span><br><span class="line">In [<span class="number">69</span>]: cat test</span><br><span class="line">In [<span class="number">70</span>]: f.write(<span class="string">'abcdef.com123'</span>)</span><br><span class="line">Out[<span class="number">70</span>]: <span class="number">13</span></span><br><span class="line">In [<span class="number">71</span>]: cat test</span><br><span class="line">In [<span class="number">72</span>]: f.write(<span class="string">'123\nhahah'</span>)<span class="comment">#肯定大于15个字节，依旧没生效</span></span><br><span class="line">Out[<span class="number">72</span>]: <span class="number">9</span></span><br><span class="line">In [<span class="number">73</span>]: cat test</span><br><span class="line">In [<span class="number">74</span>]: f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#buffering =0 这是一种特殊的二进制，不需要内存的buffer,可以看做是一个FIFO的文件</span></span><br><span class="line">In [<span class="number">75</span>]: f = open(<span class="string">'test'</span>,<span class="string">'w+'</span>,<span class="number">0</span>)<span class="comment">#此处报错证明buffering为0只能在二进制模式下</span></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">ValueError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-75</span><span class="number">-05</span>af75a07352&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 f = open('test','w+',0)</span><br><span class="line"></span><br><span class="line">ValueError: can<span class="string">'t have unbuffered text I/O</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [76]: f = open('</span>test<span class="string">','</span>wb+<span class="string">',0)</span></span><br><span class="line"><span class="string">In [77]: f.write('</span>abc<span class="string">')#此处要注意用bytes类型</span></span><br><span class="line"><span class="string">---------------------------------------------------------------------------</span></span><br><span class="line"><span class="string">TypeError                                 Traceback (most recent call last)</span></span><br><span class="line"><span class="string">&lt;ipython-input-77-cd7fff53b2a7&gt; in &lt;module&gt;()</span></span><br><span class="line"><span class="string">----&gt; 1 f.write('</span>abc<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">TypeError: a bytes-like object is required, not '</span>st<span class="string">r'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In [78]: f.write(b'</span>abc<span class="string">')</span></span><br><span class="line"><span class="string">Out[78]: 3</span></span><br><span class="line"><span class="string">In [79]: cat test#证明实时写入硬盘</span></span><br><span class="line"><span class="string">abc</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>总结：<br>  文本模式，一般都用默认缓冲区大小<br>  二进制模式，是一个个字节的操作，可以指定buffer的大小<br>  一般来说，默认缓冲区大小是个比较好的选择，除非明确知道，否则不调整它<br>  一般编程中，明确知道需要写磁盘了，都会手动调用一次，而不是等到自动或者close的时候</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/10/file-operations/" data-id="cjlwg3eix000cjsvxw4pkbtrn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件操作/">文件操作</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/06/PY-PathOperations/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PY-PathOperations</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python模块化/">Python模块化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python路径操作/">Python路径操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pyenv/">python-pyenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-匹配/">正则-匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则-回溯引用及前后查找/">正则-回溯引用及前后查找</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Python模块化/" style="font-size: 10px;">Python模块化</a> <a href="/tags/Python路径操作/" style="font-size: 10px;">Python路径操作</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/python-pyenv/" style="font-size: 10px;">python-pyenv</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/正则-匹配/" style="font-size: 10px;">正则-匹配</a> <a href="/tags/正则-回溯引用及前后查找/" style="font-size: 10px;">正则-回溯引用及前后查找</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/10/file-operations/">Python file operations</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/06/PY-PathOperations/">PY-PathOperations</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/PY-Module/">PY-Module</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/PY-Generator/">Python-生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/15/pyenv_virtualenv/">pyenv virtualenv</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Thunk Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
